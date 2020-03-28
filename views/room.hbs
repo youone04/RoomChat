@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>Chat</title>
+        <script src="/assets/socket/socket.io.js"></script>
+        <script src="/assets/js/jquery-3.2.1.min.js"></script>
+    </head>
+<body>
+    <textarea name="teks" id="teks" cols="50" rows="8"></textarea><br>
+    <button id="kirim">kirim</button>
+
+    <h1>halaman chat</h1>
+
+        <ul id="dataPesan">
+
+        </ul>
+</body>
+<script>
+    var server = 'http://localhost:3000';
+    var io = io(server);
+    var dataSisip ='';
+    $.ajax({
+        url: server+'/pesan',
+        method: 'GET',
+        success:function(hasil){
+        var data = JSON.parse(hasil);
+        console.log(data);
+        for(var i=0;i<data.length; i++){
+
+            dataSisip += '<li>'+data[i].username+': '+data[i].message+'</li>';
+
+            $('#dataPesan').html(dataSisip);
+
+        }
+
+
+        }
+        
+    });
+
+    //kirim pesan
+    $('#kirim').click(function(){
+        var pesan = $('#teks').val();
+        $('#teks').val('');
+        console.log(teks);
+
+    io.emit('pesan',pesan);//mengirim ke server
+    })
+
+    //menangkap respon server
+    io.on('pesan',function(pesan,user){
+        console.log('server membalas',pesan,user);
+        $('#dataPesan').append('<li>'+user+': '+pesan+'</li>');
+    });
+
+</script>
+</html>
