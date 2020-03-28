@@ -29,10 +29,11 @@ app.use(function (req, res, next) {
 
 // conect database
 const conn = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'db_nodecrud'
+    host: 'ec2-54-197-48-79.compute-1.amazonaws.com',
+    user: 'hqrrbmkgjmolti',
+    password: 'd6d2a3b2d843be907585b59135a04702b26bc8edac787563e04746052cef4bc1',
+    database: 'dav9s9taq7a4jp',
+    port: '5432'
 });
 
 conn.connect((err)=>{
