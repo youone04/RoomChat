@@ -94,7 +94,7 @@ app.get('/pesan',function(req,res){
 });
 
  //input pesan
- 
+
 io.on('connection',function(socket){
     console.log('penggunaterhubung',socket.id);
     //menangkap pesan dari clent
@@ -107,6 +107,7 @@ io.on('connection',function(socket){
     });
 });
 
-http.listen(3000,function(){//inget ini
+const port=process.env.PORT||3000;
+http.listen(port,function(){//inget ini
     console.log('Server terhubung di port 3000');
 });
